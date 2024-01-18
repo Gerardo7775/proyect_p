@@ -5,6 +5,7 @@ import 'package:proyect_p/pages/ventas.dart';
 import 'package:crystal_navigation_bar/crystal_navigation_bar.dart';
 import 'package:iconly/iconly.dart';
 import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
+import 'package:proyect_p/pages/pageHome.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -25,11 +26,18 @@ class _HomePage extends State<HomePage> {
   }
 
   void bottomTapped(int index) {
-    setState(() {
-      bottomSelectedIndex = index;
-      pageController.animateToPage(bottomSelectedIndex,
-          duration: const Duration(milliseconds: 500), curve: Curves.ease);
-    });
+    setState(
+      () {
+        bottomSelectedIndex = index;
+        pageController.animateToPage(
+          bottomSelectedIndex,
+          duration: const Duration(
+            milliseconds: 500,
+          ),
+          curve: Curves.ease,
+        );
+      },
+    );
   }
 
   PageController pageController = PageController(
@@ -112,36 +120,6 @@ class _HomePage extends State<HomePage> {
               unselectedIcon: IconlyLight.ticket_star,
               selectedColor: Colors.white,
             ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class PageHome extends StatefulWidget {
-  const PageHome({super.key});
-  @override
-  State<PageHome> createState() => _PageHome();
-}
-
-class _PageHome extends State<PageHome> {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        padding: const EdgeInsets.all(20),
-        width: MediaQuery.of(context).size.width,
-        child: const Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              "Pagina principal",
-              style: TextStyle(
-                color: Colors.red,
-                fontSize: 15,
-              ),
-            )
           ],
         ),
       ),
