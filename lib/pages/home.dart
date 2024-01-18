@@ -43,7 +43,6 @@ class _HomePage extends State<HomePage> {
       extendBody: true,
       body: SliderDrawer(
         sliderOpenSize: 200,
-        slideDirection: SlideDirection.TOP_TO_BOTTOM,
         appBar: SliderAppBar(
           appBarColor: Colors.white,
           title: Text(
@@ -153,166 +152,111 @@ class _PageHome extends State<PageHome> {
 class _SliderView extends StatelessWidget {
   final Function(String)? onItemClick;
 
-  const _SliderView({
-    Key? key,
-    this.onItemClick,
-  }) : super(
-          key: key,
-        );
+  const _SliderView({Key? key, this.onItemClick}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.red,
-      padding: const EdgeInsets.only(
-        top: 10,
-      ),
+      color: Colors.white,
+      padding: const EdgeInsets.only(top: 30),
       child: ListView(
-        shrinkWrap: true,
         children: <Widget>[
-          Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: 8.0,
-                ),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: CircleAvatar(
-                        radius: 25,
-                        backgroundImage: Image.asset(
-                          'images/pizza.jpg',
-                        ).image,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.only(
-                          left: 8.0, top: 0.0, right: 5.0, bottom: 0.0),
-                      child: Text(
-                        'Pizzas \nLaurita',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const Padding(
-                padding: EdgeInsets.only(
-                  left: 20.0,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.leaderboard,
-                          color: Colors.black87,
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          'Estadisticas',
-                          style: TextStyle(
-                            color: Colors.white70,
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 25,
-                    ),
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.home,
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text('Home'),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 25,
-                    ),
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.home,
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text('Home'),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              const Padding(
-                padding: EdgeInsets.only(
-                  left: 20.0,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.home,
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text('Home'),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 25,
-                    ),
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.home,
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text('Home'),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 25,
-                    ),
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.home,
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text('Home'),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ],
+          const SizedBox(
+            height: 30,
           ),
+          CircleAvatar(
+            radius: 65,
+            backgroundColor: Colors.grey,
+            child: CircleAvatar(
+              radius: 60,
+              backgroundImage: Image.network(
+                'https://nikhilvadoliya.github.io/assets/images/nikhil_1.webp',
+              ).image,
+            ),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          const Text(
+            'Nick',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              fontSize: 30,
+            ),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          ...[
+            Menu(
+              Icons.home,
+              'Home',
+            ),
+            Menu(
+              Icons.add_circle,
+              'Add Post',
+            ),
+            Menu(
+              Icons.notifications_active,
+              'Notification',
+            ),
+            Menu(
+              Icons.favorite,
+              'Likes',
+            ),
+            Menu(
+              Icons.settings,
+              'Setting',
+            ),
+            Menu(
+              Icons.arrow_back_ios,
+              'LogOut',
+            )
+          ]
+              .map(
+                (menu) => _SliderMenuItem(
+                  title: menu.title,
+                  iconData: menu.iconData,
+                  onTap: onItemClick,
+                ),
+              )
+              .toList(),
         ],
+      ),
+    );
+  }
+}
+
+class _SliderMenuItem extends StatelessWidget {
+  final String title;
+  final IconData iconData;
+  final Function(String)? onTap;
+
+  const _SliderMenuItem(
+      {Key? key,
+      required this.title,
+      required this.iconData,
+      required this.onTap})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Text(
+        title,
+        style: const TextStyle(
+          color: Colors.black,
+          fontFamily: 'BalsamiqSans_Regular',
+        ),
+      ),
+      leading: Icon(
+        iconData,
+        color: Colors.black,
+      ),
+      onTap: () => onTap?.call(
+        title,
       ),
     );
   }
