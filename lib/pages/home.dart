@@ -36,6 +36,16 @@ class _HomePage extends State<HomePage> {
           ),
           curve: Curves.ease,
         );
+        switch(bottomSelectedIndex){
+          case (0):
+            title = "Home";
+          case (1):
+            title = "Registrar venta";
+          case (2):
+            title = "Historial";
+          case (3):
+            title = "Tickes";
+        }
       },
     );
   }
@@ -75,6 +85,16 @@ class _HomePage extends State<HomePage> {
             setState(
               () {
                 bottomSelectedIndex = index;
+                switch(bottomSelectedIndex){
+                  case (0):
+                    title = "Home";
+                  case (1):
+                    title = "Registrar venta";
+                  case (2):
+                    title = "Historial";
+                  case (3):
+                    title = "Tickes";
+                }
               },
             );
           },
