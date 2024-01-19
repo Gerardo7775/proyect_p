@@ -89,7 +89,7 @@ class _HomePage extends State<HomePage> {
                 bottomSelectedIndex = index;
                 switch (bottomSelectedIndex) {
                   case (0):
-                    title = "Home";
+                    title = "Pagina principal";
                   case (1):
                     title = "Registrar venta";
                   case (2):
