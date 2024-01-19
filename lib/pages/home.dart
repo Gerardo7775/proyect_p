@@ -36,7 +36,7 @@ class _HomePage extends State<HomePage> {
           ),
           curve: Curves.ease,
         );
-        switch(bottomSelectedIndex){
+        switch (bottomSelectedIndex) {
           case (0):
             title = "Home";
           case (1):
@@ -60,7 +60,7 @@ class _HomePage extends State<HomePage> {
     return Scaffold(
       extendBody: true,
       body: SliderDrawer(
-        sliderOpenSize: 200,
+        sliderOpenSize: 270,
         appBar: SliderAppBar(
           appBarColor: Colors.white,
           title: Text(
@@ -74,9 +74,11 @@ class _HomePage extends State<HomePage> {
         slider: _SliderView(
           onItemClick: (title) {
             _sliderDrawerKey.currentState!.closeSlider();
-            setState(() {
-              this.title = title;
-            });
+            setState(
+              () {
+                this.title = title;
+              },
+            );
           },
         ),
         child: PageView(
@@ -85,7 +87,7 @@ class _HomePage extends State<HomePage> {
             setState(
               () {
                 bottomSelectedIndex = index;
-                switch(bottomSelectedIndex){
+                switch (bottomSelectedIndex) {
                   case (0):
                     title = "Home";
                   case (1):
@@ -114,7 +116,9 @@ class _HomePage extends State<HomePage> {
         child: CrystalNavigationBar(
           currentIndex: bottomSelectedIndex,
           onTap: (index) {
-            bottomTapped(index);
+            bottomTapped(
+              index,
+            );
           },
           height: 10,
           unselectedItemColor: Colors.white70,
@@ -155,33 +159,33 @@ class _SliderView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
-      padding: const EdgeInsets.only(top: 30),
+      color: Colors.red,
+      padding: const EdgeInsets.only(top: 10),
       child: ListView(
         children: <Widget>[
           const SizedBox(
-            height: 30,
+            height: 8,
           ),
-          CircleAvatar(
-            radius: 65,
+          const CircleAvatar(
+            radius: 55,
             backgroundColor: Colors.grey,
             child: CircleAvatar(
-              radius: 60,
-              backgroundImage: Image.network(
-                'https://nikhilvadoliya.github.io/assets/images/nikhil_1.webp',
-              ).image,
+              radius: 50,
+              child: Icon(//Aqui ira la foto de perfil del empleado
+                IconlyLight.user,
+              ),
             ),
           ),
           const SizedBox(
             height: 20,
           ),
           const Text(
-            'Nick',
+            'Nombre del empleado',
             textAlign: TextAlign.center,
             style: TextStyle(
               color: Colors.black,
               fontWeight: FontWeight.bold,
-              fontSize: 30,
+              fontSize: 20,
             ),
           ),
           const SizedBox(
@@ -190,27 +194,23 @@ class _SliderView extends StatelessWidget {
           ...[
             Menu(
               Icons.home,
-              'Home',
+              'Pagina principal',
             ),
             Menu(
-              Icons.add_circle,
-              'Add Post',
+              Icons.monetization_on,
+              'Finanzas',
             ),
             Menu(
-              Icons.notifications_active,
-              'Notification',
+              Icons.person_pin,
+              'Clientes',
             ),
             Menu(
-              Icons.favorite,
-              'Likes',
-            ),
-            Menu(
-              Icons.settings,
-              'Setting',
+              Icons.local_pizza_outlined,
+              'Inventario',
             ),
             Menu(
               Icons.arrow_back_ios,
-              'LogOut',
+              'Cerrar sesion',
             )
           ]
               .map(
